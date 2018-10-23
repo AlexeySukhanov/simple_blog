@@ -36,7 +36,26 @@ class Posts extends Blog
 
     public function getPosts()
     {
+        $id = 0;
+        $posts = $return = array();
+        $template = '';
+        $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM posts");
 
+        try {
+            $query->execute();
+            for($i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i][$key] = $rowitem;
+                }
+            }
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+
+        $posts = $return;
+        $template = 'list-posts.php';
+        include_once 'frontend/templates/' . $template;
     }
 
     public function viewPost( $postId )
