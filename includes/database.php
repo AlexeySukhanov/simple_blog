@@ -15,7 +15,7 @@ class Database {
     public $opt     = "";
 
     public $dsn     = "";
-    public $pdo     = "";
+    public $pdo     = ""; // db
 
     public function __construct()
     {

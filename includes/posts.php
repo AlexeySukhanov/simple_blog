@@ -10,7 +10,7 @@ require('database.php');
 
 class Blog
 {
-    public $simple_blog_db = '';
+    public $simple_blog_db = ''; // ksdb
     public $base           = '';
 
     public function __construct()
@@ -25,7 +25,7 @@ class Posts extends Blog
 {
     public function __construct()
     {
-        parent::__construct();
+
     }
 
     public function getPosts()
