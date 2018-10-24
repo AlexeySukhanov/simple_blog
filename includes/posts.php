@@ -60,7 +60,26 @@ class Posts extends Blog
 
     public function viewPost( $postId )
     {
+        $id = $postId;
+        $posts = $return = array();
+        $template = '';
+        $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM posts WHERE id = ?");
+        try{
+            $query->execute(array($id));
+            for($i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i][$key] = $rowitem;
+                }
+            }
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
 
+        $posts = $return;
+        $posts[0]['content'] = $posts[0]['content']; // вероятно ошибка
+        $template = 'view-post.php';
+        include_once 'frontend/templates/' . $template;
     }
 }
 
