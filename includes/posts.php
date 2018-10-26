@@ -55,7 +55,7 @@ class Posts extends Blog
 
         $posts = $return;
         $template = 'list-posts.php';
-        include_once 'frontend/templates/' . $template;
+        include_once 'frontend/tmpl/' . $template;
     }
 
     public function viewPost( $postId )
@@ -79,7 +79,7 @@ class Posts extends Blog
         $posts = $return;
         $posts[0]['content'] = $posts[0]['content']; // вероятно ошибка
         $template = 'view-post.php';
-        include_once 'frontend/templates/' . $template;
+        include_once 'frontend/tmpl/' . $template;
     }
 }
 
