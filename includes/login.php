@@ -32,12 +32,13 @@ class Login
 
     public function loginSuccess()
     {
-
+        header('location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php');
+        return;
     }
 
     public function loginFail()
     {
-
+        return 'Неверное имя пользователя / пароль';
     }
 
     private function validateDetails()
