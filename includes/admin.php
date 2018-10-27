@@ -7,22 +7,11 @@
  */
 
 session_start();
-require_once('database.php');
+require_once 'database.php';
 
 class AdminPanel
 {
-    public $simple_blog_db;
-    public $base;
-
     public function __construct()
-    {
-        $this->simple_blog_db = new Database();
-        $this->base = new stdClass(); //(object)'';
-        $this->base->url = 'http://' . $_SERVER['SERVER_NAME'];
-        $this->index();
-    }
-
-    public function index()
     {
 
     }

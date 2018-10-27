@@ -6,6 +6,6 @@
  * Time: 4:31
  */
 
-require_once('includes/login.php');
+require_once 'includes/login.php';
 
 $login = new Login;

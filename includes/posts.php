@@ -6,7 +6,7 @@
  * Time: 4:35
  */
 
-require('database.php');
+require 'database.php';
 
 class Blog
 {
