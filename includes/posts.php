@@ -10,8 +10,8 @@ require('database.php');
 
 class Blog
 {
-    public $simple_blog_db; // ksdb
-    public $base;
+    public $simple_blog_db = ''; // ksdb
+    public $base           = '';
 
     public function __construct()
     {

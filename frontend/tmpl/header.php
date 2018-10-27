@@ -10,12 +10,11 @@
 </head>
 <body>
 
-<br>
 <div class="grid-container">
-    <div class="grid-x grid-margin-y">
-        <div class="cell clearfix">
-            <a href="<?php echo $this->base->url . '/admin' ?>" class="button float-right hollow secondary">Admin login</a>
-        </div>
+    <a href="<?php echo $this->base->url . '/admin' ?>" class="button">Admin login</a>
+    <div>
+        <?php if (!empty($_SERVER['PHP_SELF'])) {
+            echo 'current url: ' . $_SERVER['PHP_SELF'];
+        } ?> <br>
     </div>
-
 
