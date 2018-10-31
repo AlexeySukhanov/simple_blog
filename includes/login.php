@@ -10,11 +10,11 @@ require_once('database.php');
 
 class Login
 {
-    public $simple_blog_db;
+    public $db_object;
     public $base;
     public function __construct()
     {
-        $this->simple_blog_db = new Database();
+        $this->db_object = new Database();
         $this->base = new stdClass(); //(object)'';
         $this->base->url = 'http://' . $_SERVER['SERVER_NAME'];
         $this->index();
@@ -48,7 +48,7 @@ class Login
             $salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
             $password = md5($_POST['password']);
             $return = array();
-            $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+            $query = $this->db_object->pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
             try {
                 $query->execute( array($_POST['username'], $password) );
                 for($i = 0; $row = $query->fetch(); $i++){

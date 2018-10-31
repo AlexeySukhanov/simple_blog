@@ -10,12 +10,12 @@ require 'database.php';
 
 class Blog
 {
-    public $simple_blog_db; // ksdb
+    public $db_object; // ksdb
     public $base;
 
     public function __construct()
     {
-        $this->simple_blog_db = new Database();
+        $this->db_object             = new Database();
         $this->base           = new stdClass();
         $this->base->url      = "http://" . $_SERVER['SERVER_NAME'];
     }
@@ -39,7 +39,7 @@ class Posts extends Blog
         $id = 0;
         $posts = $return = array();
         $template = '';
-        $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM posts");
+        $query = $this->db_object->pdo->prepare("SELECT * FROM posts");
 
         try {
             $query->execute();
@@ -63,7 +63,7 @@ class Posts extends Blog
         $id = $postId;
         $posts = $return = array();
         $template = '';
-        $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM posts WHERE id = ?");
+        $query = $this->db_object->pdo->prepare("SELECT * FROM posts WHERE id = ?");
         try{
             $query->execute(array($id));
             for($i = 0; $row = $query->fetch(); $i++){
