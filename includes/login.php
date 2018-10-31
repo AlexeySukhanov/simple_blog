@@ -19,15 +19,14 @@ class Login
         $this->base->url = 'http://' . $_SERVER['SERVER_NAME'];
         $this->index();
     }
+    public $error;
 
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateDetails();
         } elseif(!empty($_GET['status']) && $_GET['status'] = 'inactive'){
-            $error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова';
-        } else{
-            $error = 'Ошибка! Пользователь не авторизован.';
+            $this->error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова';
         }
         require_once 'admin/tmpl/loginform.php';
     }
@@ -40,14 +39,14 @@ class Login
 
     public function loginFail()
     {
-        return 'Неверное имя пользователя / пароль';
+        return 'Ошибка! Неверное имя пользователя / пароль';
     }
 
     private function validateDetails()
     {
         if (!empty($_POST['username']) && !empty($POST['password'])){
             $salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
-            $password = crypt($_POST['password'], $salt);
+            $password = md5($_POST['password']);
             $return = array();
             $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
             try {
@@ -60,12 +59,16 @@ class Login
                 }
             } catch(PDOException $e){
                 echo $e->getMessage();
+                echo 'База закосячилась';
+
             }
             if (!empty($return) && !empty($return[0])) {
                 $this->loginSuccess();
             } else {
-                echo $error = $this->loginFail();
+                $this->error = $this->loginFail();
             }
+        } else{
+            $this->error = 'Ошибка! Необходимо заполнить все поля.';
         }
     }
 }
