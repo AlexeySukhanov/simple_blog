@@ -5,6 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Site Name</title>
+    <link rel="stylesheet" href="frontend/ext/fontawesome/css/all.css">
     <link rel="stylesheet" href="frontend/ext/foundation/css/foundation.css">
     <link rel="stylesheet" href="frontend/int/css/main.css">
 </head>
@@ -17,5 +18,3 @@
             <a href="<?php echo $this->base->url . '/login.php' ?>" class="button float-right hollow secondary">Admin login</a>
         </div>
     </div>
-
-
