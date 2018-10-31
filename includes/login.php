@@ -46,10 +46,10 @@ class Login
         if (!empty($_POST['username']) && !empty($POST['password'])){
             $salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
             $password = crypt($_POST['password'], $salt);
-            $return = $array();
+            $return = array();
             $query = $this->simple_blog_db->pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
             try {
-                $query->execute(array($_POST['username'], $password]));
+                $query->execute( array($_POST['username'], $password) );
                 for($i = 0; $row = $query->fetch(); $i++){
                     $return[$i] = array();
                     foreach( $row as $key => $rowitem ){
