@@ -26,6 +26,8 @@ class Login
             $this->validateDetails();
         } elseif(!empty($_GET['status']) && $_GET['status'] = 'inactive'){
             $error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова';
+        } else{
+            $error = 'Ошибка! Пользователь не авторизован.';
         }
         require_once 'admin/tmpl/loginform.php';
     }
