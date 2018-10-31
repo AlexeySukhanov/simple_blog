@@ -44,7 +44,7 @@ class Login
 
     private function validateDetails()
     {
-        if (!empty($_POST['username']) && !empty($POST['password'])){
+        if (!empty($_POST['username']) && !empty($_POST['password'])){
             $salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
             $password = md5($_POST['password']);
             $return = array();
