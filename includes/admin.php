@@ -11,6 +11,9 @@ require_once 'database.php';
 
 class AdminPanel
 {
+    public $db_object;
+    public $base;
+
     public function __construct()
     {
 
