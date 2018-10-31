@@ -14,7 +14,7 @@
 <div class="grid-container">
     <div class="grid-x grid-margin-y">
         <div class="cell clearfix">
-            <a href="<?php echo $this->base->url . '/admin' ?>" class="button float-right hollow secondary">Admin login</a>
+            <a href="<?php echo $this->base->url . '/login.php' ?>" class="button float-right hollow secondary">Admin login</a>
         </div>
     </div>
 
