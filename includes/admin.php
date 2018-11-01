@@ -48,6 +48,10 @@ class Posts extends AdminPanel
         require_once 'tmpl/manage_posts.php';
     }
 
+    public function addPost()
+    {
+        require_once 'tmpl/new_post.php';
+    }
     public function editPosts()
     {
 
@@ -57,12 +61,6 @@ class Posts extends AdminPanel
     {
 
     }
-
-    public function addPost()
-    {
-
-    }
-
     public function savePost()
     {
 
