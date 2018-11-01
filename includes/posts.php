@@ -15,7 +15,7 @@ class Blog
 
     public function __construct()
     {
-        $this->db_object             = new Database();
+        $this->db_object      = new Database();
         $this->base           = new stdClass();
         $this->base->url      = "http://" . $_SERVER['SERVER_NAME'];
     }
