@@ -31,7 +31,21 @@ class Posts extends AdminPanel
 
     public function listPosts()
     {
-
+        $posts = $return = array();
+        $query = $this->db_object->pdo->prepare("SELECT * FROM posts");
+        try{
+            $query->execute();
+            for($i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach( $row as $key => $row_item ){
+                    $return[$i][$key] = $row_item;
+                }
+            }
+        } catch(PDOException $e){
+            $e->getMessage();
+        }
+        $posts = $return;
+        require_once 'tmpl/manage_posts.php';
     }
 
     public function editPosts()
