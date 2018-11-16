@@ -5,9 +5,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Site Name</title>
-    <link rel="stylesheet" href="frontend/ext/fontawesome/css/all.css">
-    <link rel="stylesheet" href="frontend/ext/foundation/css/foundation.css">
-    <link rel="stylesheet" href="frontend/int/css/main.css">
+    <link rel="stylesheet" href="/frontend/ext/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/frontend/ext/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/frontend/int/css/main.css">
 </head>
 <body>
 
@@ -15,6 +15,6 @@
 <div class="grid-container">
     <div class="grid-x grid-margin-y">
         <div class="cell clearfix">
-            <a href="<?php echo $this->base->url . '/login.php'; ?>" class="button float-right hollow secondary">Войти</a>
+            <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/login.php'; ?>" class="button float-right hollow secondary">Войти</a>
         </div>
     </div>

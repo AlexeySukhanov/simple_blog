@@ -1,7 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Выпучень
- * Date: 23.08.2018
- * Time: 4:32
- */
+
+require_once '../includes/admin.php';
+$admin_posts = new AdminPosts();
+
+//$admin_posts->addPost();

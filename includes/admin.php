@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Выпучень
- * Date: 23.08.2018
- * Time: 4:33
- */
 
 session_start();
 require_once 'database.php';
@@ -22,11 +16,27 @@ class AdminPanel
     }
 }
 
-class Posts extends AdminPanel
+class AdminPosts extends AdminPanel
 {
     public function __construct()
     {
         parent::__construct();
+        if(!empty($_GET['action'])){
+            switch($_GET['action']){
+                case 'create':
+                    $this->addPost();
+                    break;
+                case 'save':
+                    $this->savePost();
+                    break;
+                default:
+                    $this->listPosts();
+                    break;
+            }
+        } else{
+            //$this->addPost();
+            $this->listPosts();
+        }
     }
 
     public function listPosts()
@@ -47,21 +57,63 @@ class Posts extends AdminPanel
         $posts = $return;
         require_once 'tmpl/manage_posts.php';
     }
-
     public function addPost()
     {
         require_once 'tmpl/new_post.php';
     }
+
+    public function savePost() // TODO: Проследить как это работает
+    {
+        $array = $format = $return = array();
+        if(!empty($_POST['post'])){
+            $post = $_POST['post'];
+        }
+        if(!empty($post['content'])){
+            $array['content'] = $post['content'];
+            $format[] = ':content';
+        }
+        $cols = $values = '';
+        $i = 0;
+        foreach($array as $col => $data){
+            if($i == 0){
+                $cols .= $col;
+                $values .= $format[$i];
+            } else{
+                $cols .= ',' . $col;
+                $values .= ',' . $format[$i];
+            }
+            $i++;
+        }
+        try{
+            $query = $this->db_object->pdo->prepare("INSERT INTO posts (".$cols.") VALUES (".$values.")");
+            for($c = 0; $c < $i; $c++){
+                $query->bindParam($format[$c],${'var' . $c});
+            }
+            $z = 0;
+            foreach($array as $col => $data){
+                ${'var' . $z} = $data;
+                $z++;
+            }
+            $result = $query->execute();
+            $add = $query->rowCount();
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        $query->closeCursor();
+        $this->db_object = null;
+        if(!empty($add)){
+            $status = 'Ваше сообщение успешно сохранено.';
+        } else{
+            $status = 'В процессе сохранения вашего сообщения возникла ошибка. Пожалуйста, повторите попытку позднее.';
+        }
+        header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php"); // Возможна ошибка, проверить.
+    }
+
     public function editPosts()
     {
 
     }
-
     public function editPost()
-    {
-
-    }
-    public function savePost()
     {
 
     }
@@ -71,8 +123,7 @@ class Posts extends AdminPanel
 
     }
 }
-
-class Comments extends AdminPanel
+class AdminComments extends AdminPanel
 {
     public function __construct()
     {

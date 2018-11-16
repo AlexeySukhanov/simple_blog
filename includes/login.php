@@ -28,24 +28,13 @@ class Login
         } elseif(!empty($_GET['status']) && $_GET['status'] = 'inactive'){
             $this->error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова';
         }
-        require_once 'admin/tmpl/loginform.php';
-    }
-
-    public function loginSuccess()
-    {
-        header('location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php');
-        return;
-    }
-
-    public function loginFail()
-    {
-        return 'Ошибка! Неверное имя пользователя / пароль';
+        require_once 'admin/tmpl/login_form.php';
     }
 
     private function validateDetails()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])){
-            $salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
+            //$salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
             $password = md5($_POST['password']);
             $return = array();
             $query = $this->db_object->pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
@@ -71,7 +60,20 @@ class Login
             $this->error = 'Ошибка! Необходимо заполнить все поля.';
         }
     }
+
+
+    public function loginSuccess()
+    {
+        header('location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php');
+        return;
+    }
+
+    public function loginFail()
+    {
+        return 'Ошибка! Неверное имя пользователя / пароль';
+    }
 }
+
 
 
 
