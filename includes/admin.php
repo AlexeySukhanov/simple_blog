@@ -26,8 +26,14 @@ class AdminPosts extends AdminPanel
                 case 'create':
                     $this->addPost();
                     break;
+                case 'edit':
+                    $this->editPost();
+                    break;
                 case 'save':
                     $this->savePost();
+                    break;
+                case 'delete':
+                    $this->deletePost();
                     break;
                 default:
                     $this->listPosts();
@@ -115,12 +121,12 @@ class AdminPosts extends AdminPanel
     }
     public function editPost()
     {
-
+        echo 'editPost() ' . $_GET['id'];
     }
 
     public function deletePost()
     {
-
+        echo 'deletePost() ' . $_GET['id'];
     }
 }
 class AdminComments extends AdminPanel
