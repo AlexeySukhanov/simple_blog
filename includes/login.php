@@ -26,7 +26,7 @@ class Login
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateDetails();
         } elseif(!empty($_GET['status']) && $_GET['status'] = 'inactive'){
-            $this->error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова';
+            $this->error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова.';
         }
         require_once 'admin/tmpl/login_form.php';
     }
