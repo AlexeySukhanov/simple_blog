@@ -4,7 +4,7 @@
     <div class="cell">
         <div class="h3">Панель администрирования</div>
         <a href="<?php echo $this->base->url; ?>/admin/posts.php" class="button hollow secondary">К списку записей</a>
-        <form action="/admin/posts.php?action=save">
+        <form action="/admin/posts.php?action=save" method="post">
             <fieldset class="fieldset">
                 <legend>Новая запись</legend>
                 <label>
