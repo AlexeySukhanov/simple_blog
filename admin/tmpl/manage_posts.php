@@ -3,6 +3,15 @@
 <div class="grid-x">
     <div class="cell">
         <div class="h3">Панель администрирования</div>
+
+        <?php if(!empty($_GET['status'])): ?>
+            <div class="callout success" data-closable >
+                <i class="fas fa-exclamation-triangle" style="color:green"></i>
+                <?php echo $_GET['status']; ?>
+                <button class="close-button" data-close>&times;</button>
+            </div>
+        <?php endif; ?>
+
         <a href="<?php echo '/admin/posts.php?action=create'; ?>" class="button hollow">Создать запись</a>
         <table class="hover">
             <thead>
