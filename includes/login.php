@@ -23,12 +23,26 @@ class Login
 
     public function index()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->validateDetails();
-        } elseif(!empty($_GET['status']) && $_GET['status'] = 'inactive'){
-            $this->error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова.';
+        if (!empty($_GET['status']) && $_GET['status'] = 'logout'){ // Если был произведен логаут сессия уничтожается
+            session_unset();
+            session_destroy();
+            $error = 'Ваш сеанс завершен, пожалуйста авторизируйтесь внова';
+            require_once 'admin/tmpl/login_form.php';
+        } elseif (!empty($_SESSION['login']) && $_SESSION['login'] ) { // Если сессия авторизации активна
+            header('Location: ' . $_SERVER['SERVER_NAME'] . 'admin/posts.php' );
+            exit();
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Если была произведена попытка авторизации
+                $this->validateDetails();
+            } elseif (!empty($_GET['status'])){
+                if ($_GET['status'] = 'inactive'){
+                    session_unset();
+                    session_destroy();
+                    $error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова.';
+                }
+            }
+            require_once 'admin/tmpl/login_form.php';
         }
-        require_once 'admin/tmpl/login_form.php';
     }
 
     private function validateDetails()
@@ -64,6 +78,8 @@ class Login
 
     public function loginSuccess()
     {
+        $_SESSION['login'] = true;
+        $_SESSION['timeout'] = time();
         header('location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php');
         return;
     }
