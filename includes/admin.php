@@ -10,9 +10,29 @@ class AdminPanel
 
     public function __construct()
     {
-        $this->db_object = new Database();
-        $this->base = new stdClass();
-        $this->base->url = "http://" . $_SERVER['SERVER_NAME'];
+        # Проверка на просроченность сессии
+        $inactive = 10;
+        if(isset($_SESSION['isLogin'])){
+            $sessionDuration = time() - $_SESSION['startTime'];
+            if($sessionDuration > $inactive){
+                session_unset();
+                session_destroy();
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/login.php?status=inactive');
+            }
+        }
+
+        # Обновление времени начала сессии
+        $_SESSION['startTime'] = time();
+
+        if(empty($_SESSION['isLogin'])){ // Если была попытка зайти в админ-панель напрямую
+            session_unset();
+            session_destroy();
+            header('Location: http://' . $_SERVER['SERVER_NAME'] . '/login.php?status=loggedout');
+        } else{
+            $this->db_object = new Database();
+            $this->base = new stdClass();
+            $this->base->url = "http://" . $_SERVER['SERVER_NAME'];
+        }
     }
 }
 

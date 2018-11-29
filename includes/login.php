@@ -5,7 +5,7 @@
  * Date: 23.08.2018
  * Time: 4:34
  */
-
+session_start();
 require_once('database.php');
 
 class Login
@@ -23,22 +23,22 @@ class Login
 
     public function index()
     {
-        if (!empty($_GET['status']) && $_GET['status'] = 'logout'){ // Если был произведен логаут сессия уничтожается
+        if (!empty($_GET['status']) && $_GET['status'] === 'logout'){ // Если был произведен логаут сессия уничтожается
             session_unset();
             session_destroy();
-            $error = 'Ваш сеанс завершен, пожалуйста авторизируйтесь внова';
+            $this->error = 'Ваш сеанс завершен, пожалуйста авторизируйтесь cнова';
             require_once 'admin/tmpl/login_form.php';
-        } elseif (!empty($_SESSION['login']) && $_SESSION['login'] ) { // Если сессия авторизации активна
-            header('Location: ' . $_SERVER['SERVER_NAME'] . 'admin/posts.php' );
+        } elseif (!empty($_SESSION['isLogin']) && $_SESSION['isLogin'] ) { // Если сессия авторизации активна
+            header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php' );
             exit();
         } else {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Если была произведена попытка авторизации
                 $this->validateDetails();
             } elseif (!empty($_GET['status'])){
-                if ($_GET['status'] = 'inactive'){
+                if ($_GET['status'] === 'inactive'){
                     session_unset();
                     session_destroy();
-                    $error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова.';
+                    $this->error = 'Сеанс завершен в связи с отсутствием активности. Пожалуйста, авторизируйтесь снова.';
                 }
             }
             require_once 'admin/tmpl/login_form.php';
@@ -78,8 +78,8 @@ class Login
 
     public function loginSuccess()
     {
-        $_SESSION['login'] = true;
-        $_SESSION['timeout'] = time();
+        $_SESSION['isLogin'] = true;
+        $_SESSION['startTime'] = time();
         header('location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php');
         return;
     }
