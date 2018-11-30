@@ -147,7 +147,7 @@ class AdminPosts extends AdminPanel
             $status = 'Ваше сообщение успешно сохранено.';
             header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php" . "?status=" . $status);
         } else{
-            $status = 'В процессе сохранения записи возникла ошибка. Пожалуйста, повторите попытку позднее.';
+            $status = 'В процессе сохранения записи возникла ошибка.';
             header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php?action=create&status=" . $status);
         }
 
