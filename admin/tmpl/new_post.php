@@ -19,13 +19,17 @@
 
                 <label>
                     Заголовок записи
-                    <input name="post[title]" type="text">
+                    <input name="post[title]" type="text" placeholder="Введите заголовок">
                 </label>
                 <label>
                     Содержимое записи
-                    <textarea name="post[content]" id="content" cols="30" rows="10"></textarea>
+                    <div class="wmd-panel controls">
+                        <div id="wmd-button-bar"></div>
+                        <textarea name="post[content]" id="content" cols="30" rows="10" placeholder="Введите содержимое"></textarea>
+                    </div>
                 </label>
                 <button type="submit" class="button float-right">Сохранить сообщение</button>
+                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
             </fieldset>
         </form>
     </div>
