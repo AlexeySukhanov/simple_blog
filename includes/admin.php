@@ -164,8 +164,6 @@ class AdminPosts extends AdminPanel
 
     public function deletePost()
     {
-        //echo 'deletePost() ' . $_GET['id'];
-
         if(!empty($_GET['id']) && is_numeric($_GET['id'])){
             $query = $this->db_object->pdo->prepare('DELETE FROM posts WHERE id = ?');
             $query->execute(array($_GET['id']));
@@ -180,7 +178,6 @@ class AdminPosts extends AdminPanel
                 $status = 'В процессе удаления записи возникла ошибка. Пожалуйста, повторите попытку позднее.';
                 header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status );
             }
-
         }
 
     }

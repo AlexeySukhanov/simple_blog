@@ -13,6 +13,7 @@
         <?php endif; ?>
 
         <a href="<?php echo '/admin/posts.php?action=create'; ?>" class="button hollow">Создать запись</a>
+        <a href="<?php echo '/admin/comments.php'; ?>" class="button hollow">Комментарии</a>
         <table class="hover">
             <thead>
                 <tr>

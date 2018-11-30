@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Выпучень
- * Date: 23.08.2018
- * Time: 4:32
- */
+
+echo $_SERVER['PHP_SELF'];
+echo '<br>';
+echo $_SERVER['AUTH_USER'];
