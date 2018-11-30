@@ -147,8 +147,8 @@ class AdminPosts extends AdminPanel
             $status = 'Ваше сообщение успешно сохранено.';
             header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php" . "?status=" . $status);
         } else{
-            $status = 'В процессе сохранения вашей записи возникла ошибка. Пожалуйста, повторите попытку позднее.';
-            header("Location:" . $_SERVER['PHP_SELF'] . "/?action=create&status=" . $status);
+            $status = 'В процессе сохранения записи возникла ошибка. Пожалуйста, повторите попытку позднее.';
+            header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php?action=create&status=" . $status);
         }
 
     }
@@ -164,7 +164,25 @@ class AdminPosts extends AdminPanel
 
     public function deletePost()
     {
-        echo 'deletePost() ' . $_GET['id'];
+        //echo 'deletePost() ' . $_GET['id'];
+
+        if(!empty($_GET['id']) && is_numeric($_GET['id'])){
+            $query = $this->db_object->pdo->prepare('DELETE FROM posts WHERE id = ?');
+            $query->execute(array($_GET['id']));
+            $delete = $query->rowCount();
+            $query->closeCursor();
+            $this->db_object = null;
+
+            if(!empty($delete) && $delete > 0){
+                $status = 'Запись была успешно удалена.';
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status );
+            } else{
+                $status = 'В процессе удаления записи возникла ошибка. Пожалуйста, повторите попытку позднее.';
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status );
+            }
+
+        }
+
     }
 }
 class AdminComments extends AdminPanel
