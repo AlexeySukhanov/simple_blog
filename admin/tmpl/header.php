@@ -7,7 +7,13 @@
     <title>Your Site Name</title>
     <link rel="stylesheet" href="/vendors/fontawesome/css/all.css">
     <link rel="stylesheet" href="/vendors/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/vendors/pagedown/pagedown.css">
     <link rel="stylesheet" href="/admin/resourses/css/main.css">
+
+
+    <script src="/vendors/pagedown/Markdown.Converter.js"></script>
+    <script src="/vendors/pagedown/Markdown.Sanitizer.js"></script>
+    <script src="/vendors/pagedown/Markdown.Editor.js"></script>
 </head>
 <body>
 

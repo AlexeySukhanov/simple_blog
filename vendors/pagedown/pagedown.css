@@ -1,0 +1,33 @@
+.wmd-preview{
+    background-color: #ecf0f1;
+    min-height: 240px;
+    padding: 16px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+
+.wmd-button-row{
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.wmd-button{
+    display: inline-block;
+
+}
+
+.wmd-spacer{
+    display: inline-block;
+    margin-right: 12px;
+
+}
+
+.wmd-button > span {
+    background-image:
+            url('wmd-buttons.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}

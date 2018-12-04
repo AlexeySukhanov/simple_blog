@@ -13,23 +13,25 @@
             </div>
         <?php endif; ?>
 
-        <form action="/admin/posts.php?action=save" method="post">
+        <form action="/admin/posts.php?action=save" method="post" id="createEnty">
             <fieldset class="fieldset">
                 <legend>Новая запись</legend>
-
                 <label>
                     Заголовок записи
                     <input name="post[title]" type="text" placeholder="Введите заголовок">
                 </label>
                 <label>
                     Содержимое записи
+                    <div name="post[content]" id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                    <input type="hidden" id="hcontent" name="post[content]" value="empty">
+
+<!--                    <div name="post[content]" id="wmd-preview2" class="wmd-panel wmd-preview"></div>-->
                     <div class="wmd-panel controls">
                         <div id="wmd-button-bar"></div>
-                        <textarea name="post[content]" id="content" cols="30" rows="10" placeholder="Введите содержимое"></textarea>
+                        <textarea  id="wmd-input" class="wmd-input" cols="30" rows="8" placeholder="Введите содержимое"></textarea>
                     </div>
                 </label>
                 <button type="submit" class="button float-right">Сохранить сообщение</button>
-                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
             </fieldset>
         </form>
     </div>
