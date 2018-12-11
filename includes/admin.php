@@ -187,6 +187,11 @@ class AdminComments extends AdminPanel
     public function __construct()
     {
         parent::__construct();
+        if(!empty($_GET['action'] && $_GET['action'] == 'delete')){
+            $this->deleteComment();
+        } else {
+            $this->listComments();
+        }
     }
 
     public function listComments()
@@ -194,7 +199,7 @@ class AdminComments extends AdminPanel
 
     }
 
-    public function deletePost()
+    public function deleteComment()
     {
 
     }
