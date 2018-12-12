@@ -173,10 +173,10 @@ class AdminPosts extends AdminPanel
 
             if(!empty($delete) && $delete > 0){
                 $status = 'Запись была успешно удалена.';
-                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status );
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status ); //  TODO: Здесь и аналогичних редиректах предусмотреть возможность входа через https
             } else{
                 $status = 'В процессе удаления записи возникла ошибка. Пожалуйста, повторите попытку позднее.';
-                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status );
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status ); //  TODO: Здесь и аналогичних редиректах предусмотреть возможность входа через https
             }
         }
 
@@ -217,7 +217,18 @@ class AdminComments extends AdminPanel
 
     public function deleteComment()
     {
+        if(!empty($_GET['id']) && is_numeric($_GET['id'])){
+            $query = $this->db_object->pdo->prepare('DELETE FROM comments WHERE id = ?');
+            $query->execute(array($_GET['id']));
+            $deleted = $query->rowCount();
+            $this->db_object = null;
 
+            if(!empty($delete) && $delete > 0){
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/comments.php?delete=success'); //  TODO: Здесь и аналогичних редиректах предусмотреть возможность входа через https
+            } else {
+                header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/comments.php?delete=error'); //  TODO: Здесь и аналогичних редиректах предусмотреть возможность входа через https
+            }
+        }
     }
 }
 
