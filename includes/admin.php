@@ -196,6 +196,22 @@ class AdminComments extends AdminPanel
 
     public function listComments()
     {
+        $comments = array();
+        $return = array();
+
+        $query = $this->db_object->pdo->prepare('SELECT * FROM comments');
+        try{
+            for($i = 0; $row = $query->fetch(); $i++ ){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i][$k] = $rowitem;
+                }
+            }
+        } catch (PDOException $e){
+            echo $e->getMessage();
+        }
+        $comments = $return;
+        require_once 'tmpl/managecomments.php';
 
     }
 
