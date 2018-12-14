@@ -139,10 +139,7 @@ class AdminPosts extends AdminPanel
                 $query->closeCursor();
                 $this->db_object = null;
             }
-
          }
-
-
         if(!empty($add)){
             $status = 'Ваше сообщение успешно сохранено.';
             header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php" . "?status=" . $status);
@@ -198,21 +195,21 @@ class AdminComments extends AdminPanel
     {
         $comments = array();
         $return = array();
-
-        $query = $this->db_object->pdo->prepare('SELECT * FROM comments');
+        $query = $this->db_object->pdo->prepare("SELECT * FROM comments");
         try{
+            $query->execute();
             for($i = 0; $row = $query->fetch(); $i++ ){
                 $return[$i] = array();
                 foreach($row as $key => $rowitem){
-                    $return[$i][$k] = $rowitem;
+                    $return[$i][$key] = $rowitem;
                 }
             }
         } catch (PDOException $e){
             echo $e->getMessage();
         }
+        print_r($row);
         $comments = $return;
-        require_once 'tmpl/managecomments.php';
-
+        require_once 'tmpl/manage_comments.php';
     }
 
     public function deleteComment()
