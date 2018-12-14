@@ -2,7 +2,7 @@
 
 <div class="grid-x">
     <div class="cell">
-        <div class="h3">Панель администрирования</div>
+        <div class="h3">Панель администрирования :: Управление записями </div>
 
         <?php if(!empty($_GET['status'])): ?>
             <div class="callout success" data-closable >
@@ -17,7 +17,7 @@
         <table class="hover">
             <thead>
                 <tr>
-                    <th>Номер записи</th>
+                    <th>Идентификатор</th>
                     <th>Заголовок</th>
                     <th>Содержимое</th>
                     <th>Действия</th>
@@ -27,16 +27,16 @@
 
             <?php foreach($posts as $post): ?>
                 <tr>
-                    <td>№<?php echo htmlspecialchars($post['id']) ?></td>
+                    <td>№<?php echo htmlspecialchars($post['id']); ?></td>
                     <td>
-                        <p><?php echo htmlspecialchars($post['title']) ?></>
+                        <p><?php echo htmlspecialchars($post['title']); ?></>
                     </td>
                     <td>
                         <p><?php echo implode(' ', array_slice(explode(' ', strip_tags($post['content'])), 0, 10)); ?></>
                     </td>
                     <td class="button-group stacked-for-small">
-                        <a href="<?php echo '/admin/posts.php?id=' . $post['id'] . '&action=edit'; ?>" class="button  hollow">Править</a>
-                        <a href="<?php echo '/admin/posts.php?id=' . $post['id'] . '&action=delete';  ?>" class="button  hollow alert">Удалить</a>
+                        <a href="<?php echo '/admin/posts.php?action=edit&id=' . $post['id']; ?>" class="button hollow">Редактировать</a>
+                        <a href="<?php echo '/admin/posts.php?action=delete&id=' . $post['id']; ?>" class="button hollow alert">Удалить</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
