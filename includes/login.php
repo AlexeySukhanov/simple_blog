@@ -12,14 +12,14 @@ class Login
 {
     public $db_object;
     public $base;
+    public $error;
     public function __construct()
     {
         $this->db_object = new Database();
-        $this->base = new stdClass(); //(object)'';
+        $this->base = new stdClass();
         $this->base->url = 'http://' . $_SERVER['SERVER_NAME'];
         $this->index();
     }
-    public $error;
 
     public function index()
     {
