@@ -57,6 +57,13 @@ class Posts extends Blog
         }
 
         $posts = $return;
+
+        # Добавление в массив $posts значения количества комментариев для каждой записи
+        foreach($posts as $key = $post ){
+            $posts[$key]['comments'] = $this->comments->commentNumber($post['id']);
+        }
+
+
         $template = 'list-posts.php';
         include_once 'frontend/tmpl/' . $template;
     }
