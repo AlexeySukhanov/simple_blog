@@ -23,6 +23,7 @@ class Blog
 
 class Posts extends Blog
 {
+    public $comments;
     public function __construct()
     {
         parent::__construct();
@@ -77,7 +78,10 @@ class Posts extends Blog
         }
 
         $posts = $return;
-        $posts[0]['content'] = $posts[0]['content']; // вероятно ошибка
+        $markdown = new Michelf\Markdown();
+        $posts[0]['content'] = $markdown->defaultTransform($posts[0]['content']);
+        $post_comments = $this->comments->getComments($posts['id']);
+
         $template = 'view-post.php';
         include_once 'frontend/tmpl/' . $template;
     }
