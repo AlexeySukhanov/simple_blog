@@ -80,7 +80,7 @@ class Posts extends Blog
         }
 
         $posts = $return;
-        $markdown = new Michelf\Markdown();
+        $markdown = new Michelf\Markdown(); // TODO: Добавить аналогичную обработку для вывода всех записей и вывода всех записей в админке
         $posts[0]['content'] = $markdown->defaultTransform($posts[0]['content']);
         $post_comments = $this->comments->getComments($posts['id']);
 
