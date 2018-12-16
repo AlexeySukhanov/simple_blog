@@ -6,7 +6,9 @@
  * Time: 4:35
  */
 
-require 'database.php';
+require_once 'database.php';
+include_once './vendors/php-markdown/Michelf/Markdown.inc.php';
+
 
 class Blog
 {
