@@ -59,7 +59,7 @@ class Posts extends Blog
         $posts = $return;
 
         # Добавление в массив $posts значения количества комментариев для каждой записи
-        foreach($posts as $key = $post ){
+        foreach($posts as $key => $post ){
             $posts[$key]['comments'] = $this->comments->commentNumber($post['id']);
         }
 
