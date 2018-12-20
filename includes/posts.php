@@ -101,6 +101,9 @@ class Comments extends Blog
     public function __construct()
     {
         parent::__construct();
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['comment']) ){
+            $this->addComment();
+        }
     }
 
     public function commentNumber( $postId )
