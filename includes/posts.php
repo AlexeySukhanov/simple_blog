@@ -108,7 +108,12 @@ class Comments extends Blog
 
     public function commentNumber( $postId )
     {
-
+        $query = $this->db_object->dbselect('comments', array('*'), array('postid' => $postid));
+        $commentCount = count($query);
+        if($commentCount <= 0){
+            $commentCount = 0;
+        }
+        return $commentCount;
     }
 
     public function getComments( $postId )
