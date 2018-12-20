@@ -106,7 +106,7 @@ class Comments extends Blog
         }
     }
 
-    public function commentNumber( $postId )
+    public function commentNumber( $postid )
     {
         $query = $this->db_object->dbselect('comments', array('*'), array('postid' => $postid));
         $commentCount = count($query);
@@ -116,9 +116,9 @@ class Comments extends Blog
         return $commentCount;
     }
 
-    public function getComments( $postId )
-    {
-
+    public function getComments( $postid )
+   {
+        return $this->db_object->dbselect('comments', array('*'), array('postid' => $postid));
     }
 
     public function addComment()
