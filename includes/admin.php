@@ -92,7 +92,6 @@ class AdminPosts extends AdminPanel
     {
         $array = array();
         $pseudoVarArr = array();
-        // $return = array();
 
         # Проверка подучения данных POST
         if(!empty($_POST['post'])){ // Если значения из формы были передано
@@ -106,7 +105,7 @@ class AdminPosts extends AdminPanel
                 # Создание списка колонок и списка псевдопременных
                 $colNameList   = ''; // Список названий колонок
                 $pseudoVarList = ''; // Список названий псевдопеременных
-                $i      = 0;
+                $i = 0;
                 foreach($array as $colName => $data){
                     if($i == 0){
                         $colNameList .= $colName;
@@ -131,16 +130,15 @@ class AdminPosts extends AdminPanel
                     }
                     $result = $query->execute();
                     $add = $query->rowCount();
+                    $query->closeCursor();
+                    $this->db_object = null;
 
                 } catch(PDOException $e){
                     echo $e->getMessage();
                 }
-
-                $query->closeCursor();
-                $this->db_object = null;
             }
          }
-        if(!empty($add)){
+        if(!empty($add) && $add > 0){
             $status = 'Ваше сообщение успешно сохранено.';
             header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php" . "?status=" . $status);
         } else{
@@ -212,7 +210,7 @@ class AdminComments extends AdminPanel
         require_once 'tmpl/manage_comments.php';
     }
 
-    public function deleteComment()
+        public function deleteComment()
     {
         if(!empty($_GET['id']) && is_numeric($_GET['id'])){
             $query = $this->db_object->pdo->prepare('DELETE FROM comments WHERE id = ?');
