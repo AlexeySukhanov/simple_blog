@@ -132,7 +132,20 @@ class Comments extends Blog
 
     public function getComments( $postid )
    {
-        return $this->db_object->dbselect('comments', array('*'), array('postid' => $postid));
+       $return = array();
+       $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid = ' . $postid);
+       try{
+            $query->execute();
+            for($i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i][$key] = $rowitem;
+                }
+            }
+       } catch(PDOException $e) {
+            $e->getMessage();
+       }
+       return $query = $return;
     }
 
     public function addComment()
