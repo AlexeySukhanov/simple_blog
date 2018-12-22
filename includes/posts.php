@@ -150,6 +150,78 @@ class Comments extends Blog
 
     public function addComment()
     {
+        $status = '';
+        $array  = array();
+        $pseudoVarArr = array();
+
+        # Проверка подучения данных POST
+        if(!empty($_POST['comment'])){ // Если значения из формы были передано
+            $comment = $_POST['comment'];
+
+            # Проверка того, что все поля заполнены и создание псевдопеременных для хранения их значений
+            if(!empty($comment['fullname']) && !empty($comment['email']) && !empty($comment['context']) && !empty($comment['postid'])){
+                # Создание списка колонок и списка псевдопременных
+                $pseudoVarArr[] = ':fullname';
+                $pseudoVarArr[] = ':email';
+                $pseudoVarArr[] = ':context';
+                $pseudoVarArr[] = ':postid';
+                $array['name'] = $comment['fullname'];
+                $array['email'] = $comment['email'];
+                $array['comment'] = $comment['context'];
+                $array['postid'] = $comment['postid'];
+
+                $colNameList   = ''; // Список названий колонок
+                $pseudoVarList = ''; // Список названий псевдопеременных
+                $i      = 0;
+                foreach($array as $colName => $data){
+                    if($i == 0){
+                        $colNameList .= $colName;
+                        $pseudoVarList .= $pseudoVarArr[$i];
+                    } else{
+                        $colNameList .= ',' . $colName;
+                        $pseudoVarList .= ',' . $pseudoVarArr[$i];
+                    }
+                    $i++;
+                }
+
+                try{
+                    $query = $this->db_object->pdo->prepare("INSERT INTO comments (".$colNameList.") VALUES (".$pseudoVarList.")");
+                    for($c = 0; $c < $i; $c++){
+                        $query->bindParam($pseudoVarArr[$c],${'pseudoVar' . $c});
+                    }
+
+                    $z = 0;
+                    foreach($array as $colName => $data){
+                        ${'pseudoVar' . $z} = $data;
+                        $z++;
+                    }
+
+                    $result = $query->execute();
+                    $add = $query->rowCount();
+                    $query->closeCursor();
+                    $this->db_object = null;
+                } catch(PDOException $e) {
+                    echo $e->getMessage();
+                }
+            }
+        }
+
+        if(!empty($add) && $add > 0){
+            $status = array('success' => 'Комментарий сохранен');
+            $key = 'success';
+        } else {
+            $status = array('error' => 'В процессе сохранения комментария возникла ошибка');
+            $key = 'error';
+        }
+        header('http://' . $_SERVER['SERVER_NAME'] . '/?id=' . $comment['postid']) . '&status=' . $key;
+
+//        if(!empty($add && $add > 0)){
+//            $status = 'Ваше сообщение успешно сохранено.';
+//            header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php" . "?status=" . $status);
+//        } else{
+//            $status = 'В процессе сохранения записи возникла ошибка.';
+//            header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php?action=create&status=" . $status);
+//        }
 
     }
 
