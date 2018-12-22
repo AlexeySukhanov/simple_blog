@@ -143,7 +143,7 @@ class Comments extends Blog
                 }
             }
        } catch(PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
        }
        return $query = $return;
     }
