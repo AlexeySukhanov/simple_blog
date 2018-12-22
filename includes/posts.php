@@ -89,7 +89,7 @@ class Posts extends Blog
         $posts = $return;
         $markdown = new Michelf\Markdown(); // TODO: Добавить аналогичную обработку для вывода всех записей и вывода всех записей в админке
         $posts[0]['content'] = $markdown->defaultTransform($posts[0]['content']);
-        $post_comments = $this->comments->getComments($posts['id']);
+        $post_comments = $this->comments->getComments($posts[0]['id']);
 
         $template = 'view-post.php';
         include_once 'frontend/tmpl/' . $template;
