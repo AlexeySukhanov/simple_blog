@@ -108,7 +108,21 @@ class Comments extends Blog
 
     public function commentNumber( $postid )
     {
-        $query = $this->db_object->dbselect('comments', array('*'), array('postid' => $postid));
+        $return = array();
+        $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid =' . $postid);
+        try {
+            $query->execute();
+            for( $i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i] = $rowitem;
+                }
+            }
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $query = $return;
         $commentCount = count($query);
         if($commentCount <= 0){
             $commentCount = 0;
