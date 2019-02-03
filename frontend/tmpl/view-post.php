@@ -12,7 +12,6 @@
     <div class="cell">
         <a href="<?= $this->base->url; ?>" class="button hollow">Вернуться к списку сообщений</a>
     </div>
-
 </div>
 
 <?php require_once 'footer.php'; ?>
