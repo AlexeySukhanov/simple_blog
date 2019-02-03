@@ -25,7 +25,7 @@
             </thead>
             <tbody>
 
-            <?php foreach($posts as $post): ?>
+            <?php foreach(array_reverse($posts) as $post): ?>
                 <tr>
                     <td>№<?php echo htmlspecialchars($post['id']); ?></td>
                     <td>
