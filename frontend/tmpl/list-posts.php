@@ -2,7 +2,7 @@
 
 <div class="grid-y grid-margin-y">
     <h1>List Posts</h1>
-    <?php foreach(array_reverse($posts) as $post):
+    <?php foreach(array_reverse($posts) as $post): ?>
         <div class="cell">
             <h2>Сообщение №<?= $post['id']; ?>: <?= htmlspecialchars($post['title']); ?>.</h2>
             <p><?= implode(' ',  array_slice(explode(' ', strip_tags(($post['content']))), 0, 40)); ?>[...]</p>
