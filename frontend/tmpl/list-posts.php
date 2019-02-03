@@ -5,7 +5,7 @@
     <?php foreach($posts as $post): // TODO: Сделать обратный или хронологический цикл ?>
         <div class="cell">
             <h2>Сообщение №<?= $post['id']; ?>: <?= htmlspecialchars($post['title']); ?>.</h2>
-            <p><?= implode(' ',  array_slice(explode(' ',htmlspecialchars(($post['content']), ENT_QUOTES )), 0, 40)); ?>[...]</p>
+            <p><?= implode(' ',  array_slice(explode(' ', strip_tags(($post['content']))), 0, 40)); ?>[...]</p>
             <a href="<?= $this->base->url . '/?id=' . $post['id']; ?>" class="button hollow">Подробнее</a>
             <hr>
         </div>
