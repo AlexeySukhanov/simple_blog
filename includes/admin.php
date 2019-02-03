@@ -10,7 +10,7 @@ class AdminPanel
 
     public function __construct()
     {
-        # Проверка на просроченность сессии
+        // Проверка на просроченность сессии
         $inactive = 600;
         if(isset($_SESSION['isLogin'])){
             $sessionDuration = time() - $_SESSION['startTime'];

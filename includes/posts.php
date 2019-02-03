@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Выпучень
- * Date: 23.08.2018
- * Time: 4:35
- */
 
 require_once 'database.php';
 include_once './vendors/php-markdown/Michelf/Markdown.inc.php';
-
 
 class Blog
 {
@@ -29,12 +22,14 @@ class Posts extends Blog
     public function __construct()
     {
         parent::__construct();
-        $this->comments = new Comments();
+        $this->comments = new Comments(); # Возможен дубль
         if( !empty($_GET['id']) ){
             $this->viewPost($_GET['id']);
         } else {
             $this->getPosts();
         }
+
+        include_once 'frontend/tmpl/' . $template;
     }
 
     public function getPosts()
@@ -57,15 +52,11 @@ class Posts extends Blog
         }
 
         $posts = $return;
-
-        # Добавление в массив $posts значения количества комментариев для каждой записи
+        // Добавление в массив $posts значения количества комментариев для каждой записи
         foreach($posts as $key => $post ){
             $posts[$key]['comments'] = $this->comments->commentNumber($post['id']);
         }
-
-
         $template = 'list-posts.php';
-        include_once 'frontend/tmpl/' . $template;
     }
 
     public function viewPost( $postId )
@@ -90,9 +81,7 @@ class Posts extends Blog
         $markdown = new Michelf\Markdown(); // TODO: Добавить аналогичную обработку для вывода всех записей и вывода всех записей в админке
         $posts[0]['content'] = $markdown->defaultTransform($posts[0]['content']);
         $post_comments = $this->comments->getComments($posts[0]['id']);
-
         $template = 'view-post.php';
-        include_once 'frontend/tmpl/' . $template;
     }
 }
 

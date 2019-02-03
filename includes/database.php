@@ -1,21 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Выпучень
- * Date: 23.08.2018
- * Time: 4:34
- */
 
 class Database {
-    public $host    = "";
-    public $db_name  = "";
-    public $charset = "";
-    public $user    = "";
-    public $pass    = "";
-    public $opt     = "";
+    public $host;
+    public $db_name;
+    public $charset;
+    public $user;
+    public $pass;
+    public $opt;
 
-    public $dsn     = "";
-    public $pdo     = ""; // db
+    public $dsn;
+    public $pdo; // db
 
     public function __construct()
     {
