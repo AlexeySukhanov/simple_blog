@@ -35,7 +35,7 @@
                         <p><?php echo implode(' ', array_slice(explode(' ', strip_tags($post['content'])), 0, 10)); ?></>
                     </td>
                     <td class="button-group stacked-for-small">
-                        <a href="<?php echo '/admin/posts.php?action=edit&id=' . $post['id']; ?>" class="button hollow">Редактировать</a>
+                        <a href="<?php echo '/admin/posts.php?action=edit&id=' . $post['id']; ?>" class="button hollow">Редактировать</a> <?php //TODO: Сделать возможность редактирования постов! ?>
                         <a href="<?php echo '/admin/posts.php?action=delete&id=' . $post['id']; ?>" class="button hollow alert">Удалить</a>
                     </td>
                 </tr>

@@ -43,7 +43,9 @@ class Login
     private function validateDetails()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])){
+            // TODO: Усложнить функцию генерации пароля добавив в него соль
             //$salt = 'vuv;-oND?EfK`EXAsm+{s.RjR.!xVTiyla8K4%-%[+n&.rF0{}(.y%ArenW`ZL#b';
+            // TODO: Реализовать возможность изменения личного пароля авторизованным пользователем
             $password = md5($_POST['password']);
             $return = array();
             $query = $this->db_object->pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
