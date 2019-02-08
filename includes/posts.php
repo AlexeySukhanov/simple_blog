@@ -32,7 +32,6 @@ class Posts extends Blog
 
     public function getPosts()
     {
-        $id = 0;
         $posts = $return = array();
         $template = '';
         $query = $this->db_object->pdo->prepare("SELECT * FROM posts");
