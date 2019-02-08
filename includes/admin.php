@@ -60,7 +60,6 @@ class AdminPosts extends AdminPanel
                     break;
             }
         } else{
-            //$this->addPost();
             $this->listPosts();
         }
     }
