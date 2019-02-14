@@ -28,7 +28,7 @@ class AdminPanel
             session_unset();
             session_destroy();
             header('Location: http://' . $_SERVER['SERVER_NAME'] . '/login.php?status=loggedout');
-        } else{
+        } else{ // Если сессия активна
             $this->db_object = new Database();
             $this->base = new stdClass();
             $this->base->url = "http://" . $_SERVER['SERVER_NAME'];
@@ -173,7 +173,6 @@ class AdminPosts extends AdminPanel
                 header('Location: http://' . $_SERVER['SERVER_NAME'] . '/admin/posts.php?status=' . $status ); //  TODO: Здесь и аналогичних редиректах предусмотреть возможность входа через https
             }
         }
-
     }
 }
 class AdminComments extends AdminPanel
@@ -204,7 +203,6 @@ class AdminComments extends AdminPanel
         } catch (PDOException $e){
             echo $e->getMessage();
         }
-        print_r($row);
         $comments = $return;
         require_once 'tmpl/manage_comments.php';
     }
