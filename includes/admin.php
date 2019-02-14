@@ -147,13 +147,13 @@ class AdminPosts extends AdminPanel
 
     }
 
-    public function editPosts()
+    public function editPosts() // TODO: Возможно убрать
     {
 
     }
     public function editPost()
     {
-        echo 'editPost() ' . $_GET['id'];
+        echo 'editPost() ' . $_GET['id']; // TODO: Дописать функцию AdminPosts->editPost()
     }
 
     public function deletePost()
