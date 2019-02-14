@@ -49,9 +49,11 @@ class Posts extends Blog
         }
 
         $posts = $return;
+        $markdown = new Michelf\Markdown();
 
         # Добавление в массив $posts значения количества комментариев для каждой записи
         foreach($posts as $key => $post ){
+            $posts[$key]['content'] = $markdown->defaultTransform($posts[$key]['content']);
             $posts[$key]['comments'] = $this->comments->commentNumber($post['id']);
         }
 
