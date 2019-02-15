@@ -6,8 +6,8 @@
         <div class="cell">
             <h2>Сообщение №<?= $post['id']; ?>: <?= htmlspecialchars($post['title']); ?>.</h2>
             <p><?= implode(' ',  array_slice(explode(' ', strip_tags(($post['content']))), 0, 40)); ?>[...]</p>
-            <p>Комментариев: <?= $post['comments']; // TODO: Сделать аналогичный вывод количества комментов в админке ?></p>
             <a href="<?= $this->base->url . '/?id=' . $post['id']; ?>" class="button hollow">Подробнее</a>
+            <p>Комментариев: <?= $post['comments']; // TODO: Сделать аналогичный вывод количества комментов в админке ?></p>
             <hr>
         </div>
     <?php endforeach; ?>

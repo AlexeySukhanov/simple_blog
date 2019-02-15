@@ -2,4 +2,4 @@
 
 require_once('includes/posts.php');
 $blog = new Posts;
-$admin = new Comments; // Возможен дубль
+//$admin = new Comments; // Возможен дубль

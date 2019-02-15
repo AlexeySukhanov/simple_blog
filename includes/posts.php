@@ -99,48 +99,6 @@ class Comments extends Blog
         }
     }
 
-    public function commentNumber( $postid )
-    {
-        $return = array();
-        $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid =' . $postid);
-        try {
-            $query->execute();
-            for( $i = 0; $row = $query->fetch(); $i++){
-                $return[$i] = array();
-                foreach($row as $key => $rowitem){
-                    $return[$i] = $rowitem;
-                }
-            }
-        } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        $query = $return;
-        $commentCount = count($query);
-        if($commentCount <= 0){
-            $commentCount = 0;
-        }
-        return $commentCount;
-    }
-
-    public function getComments( $postid )
-   {
-       $return = array();
-       $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid = ' . $postid);
-       try{
-            $query->execute();
-            for($i = 0; $row = $query->fetch(); $i++){
-                $return[$i] = array();
-                foreach($row as $key => $rowitem){
-                    $return[$i][$key] = $rowitem;
-                }
-            }
-       } catch(PDOException $e) {
-            echo $e->getMessage();
-       }
-       return $query = $return;
-    }
-
     public function addComment()
     {
         $status = '';
@@ -148,7 +106,7 @@ class Comments extends Blog
         $pseudoVarArr = array();
 
         # Проверка подучения данных POST
-        if(!empty($_POST['comment'])){ // Если значения из формы были передано
+        if(!empty($_POST['comment'])){ // Если значения из формы были переданы
             $comment = $_POST['comment'];
 
             # Проверка того, что все поля заполнены и создание псевдопеременных для хранения их значений
@@ -217,6 +175,50 @@ class Comments extends Blog
 //        }
 
     }
+
+    public function commentNumber($postid)
+    {
+        $return = array();
+        $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid =' . $postid);
+        try {
+            $query->execute();
+            for( $i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i] = $rowitem;
+                }
+            }
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $query = $return;
+        $commentCount = count($query);
+        if($commentCount <= 0){
+            $commentCount = 0;
+        }
+        return $commentCount;
+    }
+
+    public function getComments($postid)
+   {
+       $return = array();
+       $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid = ' . $postid);
+       try{
+            $query->execute();
+            for($i = 0; $row = $query->fetch(); $i++){
+                $return[$i] = array();
+                foreach($row as $key => $rowitem){
+                    $return[$i][$key] = $rowitem;
+                }
+            }
+       } catch(PDOException $e) {
+            echo $e->getMessage();
+       }
+       return $query = $return;
+    }
+
+
 
 }
 
