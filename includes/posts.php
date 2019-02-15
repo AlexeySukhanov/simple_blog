@@ -152,15 +152,15 @@ class Comments extends Blog
             $comment = $_POST['comment'];
 
             # Проверка того, что все поля заполнены и создание псевдопеременных для хранения их значений
-            if(!empty($comment['fullname']) && !empty($comment['email']) && !empty($comment['context']) && !empty($comment['postid'])){
+            if(!empty($comment['name']) && !empty($comment['email']) && !empty($comment['comment']) && !empty($comment['postid'])){
                 # Создание списка колонок и списка псевдопременных
-                $pseudoVarArr[] = ':fullname';
+                $pseudoVarArr[] = ':name';
                 $pseudoVarArr[] = ':email';
-                $pseudoVarArr[] = ':context';
+                $pseudoVarArr[] = ':comment';
                 $pseudoVarArr[] = ':postid';
-                $array['name'] = $comment['fullname'];
+                $array['name'] = $comment['name'];
                 $array['email'] = $comment['email'];
-                $array['comment'] = $comment['context'];
+                $array['comment'] = $comment['comment'];
                 $array['postid'] = $comment['postid'];
 
                 $colNameList   = ''; // Список названий колонок
