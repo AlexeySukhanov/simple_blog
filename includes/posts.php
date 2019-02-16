@@ -22,7 +22,7 @@ class Posts extends Blog
     public function __construct()
     {
         parent::__construct();
-        $this->comments = new Comments(); # Возможен дубль
+        $this->comments = new Comments();
         if( !empty($_GET['id']) ){
             $this->viewPost($_GET['id']);
         } else {
@@ -84,46 +84,56 @@ class Posts extends Blog
         $posts[0]['content'] = $markdown->defaultTransform($posts[0]['content']);
         $post_comments = $this->comments->getComments($posts[0]['id']);
 
+        $status = $this->comments->status;
         $template = 'view-post.php';
         include_once 'frontend/tmpl/' . $template;
+
+//        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+//            header('Location: ' . $_SERVER['PHP_SELF'] . '?lol=lol');
+//        }
+
     }
 }
 
 class Comments extends Blog
 {
+    public $status;
     public function __construct()
     {
         parent::__construct();
-        if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['comment']) ){
+        session_start();
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['comment']) && $_POST['token'] !== $_SESSION['last_token'] ){
+            $_SESSION['last_token'] = $_POST['token'];
             $this->addComment();
         }
     }
 
     public function addComment()
     {
-        $status = '';
         $array  = array();
         $pseudoVarArr = array();
 
-        # Проверка подучения данных POST
+        // Проверка подучения данных POST
         if(!empty($_POST['comment'])){ // Если значения из формы были переданы
             $comment = $_POST['comment'];
 
-            # Проверка того, что все поля заполнены и создание псевдопеременных для хранения их значений
-            if(!empty($comment['name']) && !empty($comment['email']) && !empty($comment['comment']) && !empty($comment['postid'])){
-                # Создание списка колонок и списка псевдопременных
+            // Проверка того, что все поля заполнены и создание псевдопеременных для хранения их значений
+            if(!empty($comment['postid'] && !empty($comment['name']) && !empty($comment['email']) && !empty($comment['text']))){
+                // Создание списка колонок и списка псевдопременных
+                $pseudoVarArr[] = ':postid';
                 $pseudoVarArr[] = ':name';
                 $pseudoVarArr[] = ':email';
-                $pseudoVarArr[] = ':comment';
-                $pseudoVarArr[] = ':postid';
+                $pseudoVarArr[] = ':text';
+
+                $array['postid'] = $comment['postid'];
                 $array['name'] = $comment['name'];
                 $array['email'] = $comment['email'];
-                $array['comment'] = $comment['comment'];
-                $array['postid'] = $comment['postid'];
+                $array['text'] = $comment['text'];
 
                 $colNameList   = ''; // Список названий колонок
                 $pseudoVarList = ''; // Список названий псевдопеременных
-                $i      = 0;
+
+                $i = 0;
                 foreach($array as $colName => $data){
                     if($i == 0){
                         $colNameList .= $colName;
@@ -150,7 +160,7 @@ class Comments extends Blog
                     $result = $query->execute();
                     $add = $query->rowCount();
                     $query->closeCursor();
-                    $this->db_object = null;
+
                 } catch(PDOException $e) {
                     echo $e->getMessage();
                 }
@@ -158,21 +168,10 @@ class Comments extends Blog
         }
 
         if(!empty($add) && $add > 0){
-            $status = array('success' => 'Комментарий сохранен');
-            $key = 'success';
+            $this->status = 'Комментарий сохранен';
         } else {
-            $status = array('error' => 'В процессе сохранения комментария возникла ошибка');
-            $key = 'error';
+            $this->status = 'В процессе сохранения комментария возникла ошибка';
         }
-        header('http://' . $_SERVER['SERVER_NAME'] . '/?id=' . $comment['postid']) . '&status=' . $key;
-
-//        if(!empty($add && $add > 0)){
-//            $status = 'Ваше сообщение успешно сохранено.';
-//            header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php" . "?status=" . $status);
-//        } else{
-//            $status = 'В процессе сохранения записи возникла ошибка.';
-//            header("Location: http://" . $_SERVER['SERVER_NAME'] . "/admin/posts.php?action=create&status=" . $status);
-//        }
 
     }
 
@@ -217,9 +216,6 @@ class Comments extends Blog
        }
        return $query = $return;
     }
-
-
-
 }
 
 

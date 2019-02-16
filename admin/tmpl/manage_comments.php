@@ -36,7 +36,7 @@
                             <p><?php echo htmlspecialchars($comment['email']); ?></>
                         </td>
                         <td>
-                            <p><?php echo htmlspecialchars($comment['comment']); ?></>
+                            <p><?php echo htmlspecialchars($comment['text']); ?></>
                         </td>
                         <td class="button-group stacked-for-small">
                             <a href="<?php echo '/admin/comments.php?action=delete&id=' . $comment['id']; ?>" class="button  hollow alert">Удалить</a>
