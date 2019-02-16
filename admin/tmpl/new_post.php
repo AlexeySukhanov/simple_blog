@@ -25,7 +25,7 @@
                     <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
                     <div class="wmd-panel controls">
                         <div id="wmd-button-bar"></div>
-                        <textarea name="post[content]" id="wmd-input" class="wmd-input" cols="30" rows="8" placeholder="Введите содержимое"></textarea>
+                        <textarea name="post[content]" id="wmd-input" class="wmd-input" rows="8" placeholder="Введите содержимое"></textarea>
                     </div>
                 </label>
                 <button type="submit" class="button float-right">Сохранить сообщение</button>
