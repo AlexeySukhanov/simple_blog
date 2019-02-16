@@ -1,6 +1,6 @@
 <?php
 
-class Database {
+class Database { // TODO: Сделать развертывание базы данных программно
     public $host;
     public $db_name;
     public $charset;
