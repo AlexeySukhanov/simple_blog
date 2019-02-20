@@ -61,7 +61,7 @@ class Posts extends Blog
         include_once 'frontend/tmpl/' . $template;
     }
 
-    public function viewPost( $postId )
+    public function viewPost( int $postId )
     {
         $id = $postId;
         $posts = $return = array();
@@ -170,7 +170,7 @@ class Comments extends Blog
 
     }
 
-    public function commentNumber($postid)
+    public function commentNumber( int $postid): int
     {
         $return = array();
         $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid =' . $postid);
@@ -194,7 +194,7 @@ class Comments extends Blog
         return $commentCount;
     }
 
-    public function getComments($postid)
+    public function getComments( int $postid)
    {
        $return = array();
        $query = $this->db_object->pdo->prepare('SELECT * FROM comments WHERE postid = ' . $postid);
