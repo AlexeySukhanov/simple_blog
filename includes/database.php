@@ -9,7 +9,7 @@ class Database { // TODO: Сделать развертывание базы д�
     public $opt;
 
     public $dsn;
-    public $pdo; // db
+    public $pdo;
 
     public function __construct()
     {
@@ -26,20 +26,5 @@ class Database { // TODO: Сделать развертывание базы д�
 
         $this->dsn = "mysql:host=$this->host;dbname=$this->db_name;charset=$this->charset";
         $this->pdo = new PDO( $this->dsn, $this->user, $this->pass, $this->opt );
-    }
-
-    public function dbselect( $table, $select, $where=NULL )
-    {
-
-    }
-
-    public function dbadd( $tablename, $insert, $format )
-    {
-
-    }
-
-    public function dbupdate( $tablename, $insert, $where )
-    {
-
     }
 }

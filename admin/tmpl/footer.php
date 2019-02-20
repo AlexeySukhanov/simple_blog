@@ -4,8 +4,5 @@
         <script src="/vendors/what-input/what-input.js"></script>    <!-- foundation dependencies -->
         <script src="/vendors/foundation/js/foundation.js"></script>
         <script src="/vendors/foundation/js/app.js"></script>        <!-- foundation initiation -->
-        <script> <!-- pagedown initiation -->
-
-        </script>
-        <script src="/vendors/pagedown/pagedown.js"></script>
+        <script src="/vendors/pagedown/pagedown.js"></script>        <!-- pagedown initiation -->
         </body>

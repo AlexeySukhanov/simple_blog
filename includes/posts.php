@@ -87,11 +87,6 @@ class Posts extends Blog
         $status = $this->comments->status;
         $template = 'view-post.php';
         include_once 'frontend/tmpl/' . $template;
-
-//        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-//            header('Location: ' . $_SERVER['PHP_SELF'] . '?lol=lol');
-//        }
-
     }
 }
 

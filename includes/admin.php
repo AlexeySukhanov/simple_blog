@@ -116,7 +116,6 @@ class AdminPosts extends AdminPanel
                     $i++;
                 }
 
-                # Запрос к бд
                 try{
                     $query = $this->db_object->pdo->prepare("INSERT INTO posts (".$colNameList.") VALUES (".$pseudoVarList.")");
                     for($c = 0; $c < $i; $c++){
