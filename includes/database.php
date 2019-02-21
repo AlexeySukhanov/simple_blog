@@ -8,6 +8,11 @@ class Database { // TODO: Сделать развертывание базы д�
     public $pass;
     public $opt;
 
+
+
+
+
+    
     public $dsn;
     public $pdo;
 
