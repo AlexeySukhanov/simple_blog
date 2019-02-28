@@ -5,6 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Site Name</title>
+    <>
     <link rel="stylesheet" href="/vendors/fontawesome/css/all.css">
     <link rel="stylesheet" href="/vendors/foundation/css/foundation.css">
     <link rel="stylesheet" href="/frontend/resourses/css/main.css">

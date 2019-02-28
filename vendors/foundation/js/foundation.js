@@ -4631,7 +4631,7 @@ var Abide = function (_Plugin) {
 
       /**
        * Fires when the input is done checking for validation. Event trigger is either `valid.zf.abide` or `invalid.zf.abide`
-       * Trigger includes the DOM element of the input.
+       * Trigger core the DOM element of the input.
        * @event Abide#valid
        * @event Abide#invalid
        */
@@ -4663,7 +4663,7 @@ var Abide = function (_Plugin) {
 
       /**
        * Fires when the form is finished validating. Event trigger is either `formvalid.zf.abide` or `forminvalid.zf.abide`.
-       * Trigger includes the element of the form.
+       * Trigger core the element of the form.
        * @event Abide#formvalid
        * @event Abide#forminvalid
        */

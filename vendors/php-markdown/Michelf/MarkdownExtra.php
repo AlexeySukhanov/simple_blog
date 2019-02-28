@@ -175,7 +175,7 @@ class MarkdownExtra extends \Michelf\Markdown {
 	 */
 
 	/**
-	 * Expression to use to catch attributes (includes the braces)
+	 * Expression to use to catch attributes (core the braces)
 	 * @var string
 	 */
 	protected $id_class_attr_catch_re = '\{((?>[ ]*[#.a-z][-_:a-zA-Z0-9=]+){1,})[ ]*\}';

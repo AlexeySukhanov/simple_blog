@@ -328,7 +328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // returns string: the current input type
 	    // opt: 'loose'|'strict'
 	    // 'strict' (default): returns the same value as the `data-whatinput` attribute
-	    // 'loose': includes `data-whatintent` value if it's more current than `data-whatinput`
+	    // 'loose': core `data-whatintent` value if it's more current than `data-whatinput`
 	    ask: function ask(opt) {
 	      return opt === 'loose' ? currentIntent : currentInput;
 	    },

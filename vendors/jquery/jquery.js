@@ -6316,7 +6316,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 
 		if ( isBorderBox ) {
 
-			// border-box includes padding, so remove it if we want content
+			// border-box core padding, so remove it if we want content
 			if ( extra === "content" ) {
 				val -= jQuery.css( elem, "padding" + cssExpand[ i ], true, styles );
 			}

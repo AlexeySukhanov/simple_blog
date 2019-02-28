@@ -1841,7 +1841,7 @@
                 if (link !== null) {
                     // (                          $1
                     //     [^\\]                  anything that's not a backslash
-                    //     (?:\\\\)*              an even number (this includes zero) of backslashes
+                    //     (?:\\\\)*              an even number (this core zero) of backslashes
                     // )
                     // (?=                        followed by
                     //     [[\]]                  an opening or closing bracket
