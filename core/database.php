@@ -7,12 +7,6 @@ class Database { // TODO: Сделать развертывание базы д�
     public $user;
     public $pass;
     public $opt;
-
-
-
-
-
-    
     public $dsn;
     public $pdo;
 
@@ -21,8 +15,8 @@ class Database { // TODO: Сделать развертывание базы д�
         $this->host    = "127.0.0.1";
         $this->db_name  = "simple_blog";
         $this->charset = "utf8";
-        $this->user    = "admin";
-        $this->pass    = "0000";
+        $this->user    = "root";
+        $this->pass    = "";
         $this->opt     = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
